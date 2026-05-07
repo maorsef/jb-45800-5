@@ -7,7 +7,7 @@ export default function paramsValidation(validator: ObjectSchema) {
             // we push the validation result back into the request
             // because the validation may contain transformations 
             // (.e.g. uppercase)
-            request.body = await validator.validateAsync(request.params)
+            request.params = await validator.validateAsync(request.params)
             next()
         } catch (e) {
             next({

@@ -107,3 +107,30 @@ export async function createPost(request: Request<{}, {}, {title: string, body: 
         next(e)
     }
 }
+
+export async function updatePost(request: Request<{postId: string}, {}, {title: string, body: string}>, response: Response, next: NextFunction) {
+    try {
+
+        const { postId } = request.params
+        const { title, body } = request.body
+
+        const updatedPost = await Post.findByPk(postId, {
+            include: [
+                User,
+                { 
+                    model: Comment,
+                    include: [ User ]
+                }
+            ]
+        })
+        updatedPost.title = title
+        updatedPost.body = body
+        await updatedPost.save()
+
+        response.json(updatedPost)
+
+    } catch (e) {
+        console.log('there was an ERROR', e)
+        next(e)
+    }
+}
