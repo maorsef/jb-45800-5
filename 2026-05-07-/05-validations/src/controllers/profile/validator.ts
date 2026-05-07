@@ -4,3 +4,9 @@ export const newPostValidator = Joi.object({
     title: Joi.string().min(10).max(40).required(),
     body: Joi.string().min(20).required(),
 })  
+
+export const deletePostValidator = Joi.object({
+    postId: Joi.string().uuid()
+})
+
+export const getPostValidator = deletePostValidator
