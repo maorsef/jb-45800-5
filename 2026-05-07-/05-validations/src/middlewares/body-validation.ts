@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import { ObjectSchema } from "joi";
 
-export default function validation(validator: ObjectSchema) {
+export default function bodyValidation(validator: ObjectSchema) {
     return async (request: Request, response: Response, next: NextFunction) => {
         try {
             // we push the validation result back into the request
