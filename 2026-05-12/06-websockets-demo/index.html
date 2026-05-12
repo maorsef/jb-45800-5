@@ -7,9 +7,24 @@
     <script src="https://cdn.socket.io/4.8.3/socket.io.min.js" integrity="sha384-kzavj5fiMwLKzzD1f8S7TeoVIEi7uKHvbTA3ueZkrzYq75pNQUiUi6Dy98Q3fxb0" crossorigin="anonymous"></script>
     <script defer>
         const socket = io('http://localhost:3004')
+
+        socket.on('welcome', payload => {
+            document.getElementById('myId').innerHTML = payload.id
+        })
+
+        socket.on('new user', payload => {
+            document.getElementById('users').innerHTML += `<li>${payload.id}</li>`
+        })
+
+
     </script>
 </head>
 <body>
     <h1> socket demo </h1>
+    <h2 id="myId"></h2>
+
+    <ol id="users">
+
+    </ol>
 </body>
 </html>
