@@ -1,0 +1,12 @@
+.UpdatePost {
+    border: 1px dashed green;
+}
+
+.UpdatePost > form {
+    display: flex;
+    flex-direction: column;
+}
+
+.UpdatePost .error {
+    color: red;
+}
