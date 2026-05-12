@@ -1,6 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import User from "../../models/User";
 import Follow from "../../models/Follow";
+import { followersIncludes, followingIncludes } from "../includes";
 
 
 export async function getFollowers(request: Request, response: Response, next: NextFunction) {
@@ -8,10 +9,7 @@ export async function getFollowers(request: Request, response: Response, next: N
         const { userId } = request
 
         const { followers } = await User.findByPk(userId, {
-            include: [{ 
-                model: User,
-                as: 'followers'
-            }]
+            include: followersIncludes
         })
         response.json(followers)
     } catch (e) {
@@ -25,10 +23,7 @@ export async function getFollowing(request: Request, response: Response, next: N
         const { userId } = request
 
         const { following } = await User.findByPk(userId, {
-            include: [{ 
-                model: User,
-                as: 'following'
-            }]
+            include: followingIncludes
         })
         response.json(following)
     } catch (e) {

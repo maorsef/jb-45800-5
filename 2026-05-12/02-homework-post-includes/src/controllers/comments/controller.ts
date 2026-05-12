@@ -1,6 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import Comment from "../../models/Comment";
 import User from "../../models/User";
+import { commentIncludes } from "../includes";
 export async function newComment(request: Request<{postId: string}, {}, {body: string}>, response: Response, next: NextFunction) {
     try {
 
@@ -14,7 +15,7 @@ export async function newComment(request: Request<{postId: string}, {}, {body: s
             body
         })
         await comment.reload({
-            include: [User]
+            include: commentIncludes
         })
         response.json(comment)
     } catch (e) {

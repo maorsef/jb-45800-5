@@ -3,6 +3,7 @@ import Post from "../../models/Post";
 import User from "../../models/User";
 import Comment from "../../models/Comment";
 import { newPostValidator } from "./validator";
+import { commentIncludes, postIncludes, userPostsIncludes } from "../includes";
 
 export async function getProfile(request: Request, response: Response, next: NextFunction) {
 
@@ -16,16 +17,7 @@ export async function getProfile(request: Request, response: Response, next: Nex
     const { userId } = request
     try {
         const user = await User.findByPk(userId, {
-            include: [{
-                model: Post,
-                include: [
-                    User,
-                    { 
-                        model: Comment,
-                        include: [ User ]
-                    }
-                ]
-            }]
+            include: userPostsIncludes
         })
         response.json(user.posts)
 
@@ -39,13 +31,7 @@ export async function getPost(request: Request<{postId: string}>, response: Resp
         const { postId } = request.params
 
         const post = await Post.findByPk(postId, {
-            include: [
-                User,
-                { 
-                    model: Comment,
-                    include: [ User ]
-                }
-            ]
+            include: postIncludes
         })
 
         if(!post) return next({
@@ -94,13 +80,7 @@ export async function createPost(request: Request<{}, {}, {title: string, body: 
             imageUrl: ''
         })
         await newPost.reload({
-            include: [
-                User,
-                { 
-                    model: Comment,
-                    include: [ User ]
-                }
-            ]
+            include: postIncludes
         })
         response.json(newPost)
 
@@ -117,13 +97,7 @@ export async function updatePost(request: Request<{postId: string}, {}, {title: 
         const { title, body } = request.body
 
         const updatedPost = await Post.findByPk(postId, {
-            include: [
-                User,
-                { 
-                    model: Comment,
-                    include: [ User ]
-                }
-            ]
+            include: postIncludes
         })
         updatedPost.title = title
         updatedPost.body = body
