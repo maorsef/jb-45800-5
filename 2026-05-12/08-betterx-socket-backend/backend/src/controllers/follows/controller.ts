@@ -3,6 +3,7 @@ import User from "../../models/User";
 import Follow from "../../models/Follow";
 import { followersIncludes, followingIncludes } from "../includes";
 import socket from "../../io/io";
+import SocketMessages from "socket-enums-shaharsol-xyz";
 
 
 export async function getFollowers(request: Request, response: Response, next: NextFunction) {
@@ -48,7 +49,7 @@ export async function follow(request: Request<{followeeId: string}>, response: R
 
         // this is the place to trigger a socket push notification
         // to the followerId and the followeeId
-        socket.emit('new follow', newFollow)
+        socket.emit(SocketMessages.NEW_FOLLOW, newFollow)
 
 
 
