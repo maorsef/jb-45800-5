@@ -3,7 +3,7 @@ import User from "../../models/User";
 import Follow from "../../models/Follow";
 import { followersIncludes, followingIncludes } from "../includes";
 import socket from "../../io/io";
-import SocketMessages from "socket-enums-shaharsol-xyz";
+import { SocketMessages } from "socket-enums-shaharsol-xyz";
 
 
 export async function getFollowers(request: Request, response: Response, next: NextFunction) {

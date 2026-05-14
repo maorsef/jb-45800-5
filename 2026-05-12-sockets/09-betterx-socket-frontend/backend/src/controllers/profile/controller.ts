@@ -5,7 +5,7 @@ import Comment from "../../models/Comment";
 import { newPostValidator } from "./validator";
 import { commentIncludes, postIncludes, userPostsIncludes } from "../includes";
 import socket from "../../io/io";
-import SocketMessages from "socket-enums-shaharsol-xyz";
+import { SocketMessages} from "socket-enums-shaharsol-xyz";
 
 export async function getProfile(request: Request, response: Response, next: NextFunction) {
 

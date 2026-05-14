@@ -1,6 +1,6 @@
 {
   "name": "socket-enums-shaharsol-xyz",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "./dist/socket-enums.js",
   "types": "./dist/socket-enums.d.ts",

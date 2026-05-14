@@ -1,5 +1,5 @@
 import { useEffect, type PropsWithChildren } from "react"
-import SocketMessages from "socket-enums-shaharsol-xyz"
+import { SocketMessages } from "socket-enums-shaharsol-xyz"
 import { io } from "socket.io-client"
 import { useAppDispatch } from "../../redux/hooks"
 import { add } from "../../redux/profile-slice"
