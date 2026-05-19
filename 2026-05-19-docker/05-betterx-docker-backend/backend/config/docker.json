@@ -1,0 +1,13 @@
+{
+    "db": {
+        "host": "host.docker.internal"
+    },
+    "io": {
+        "url": "http://host.docker.internal:3004"
+    },
+    "aws": {
+        "connection": {
+            "endpoint": "http://host.docker.internal:4566"
+        }
+    }
+}
