@@ -1,0 +1,1 @@
+alert('hello i am javascript from the server running in your browser')
