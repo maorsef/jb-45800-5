@@ -1,0 +1,17 @@
+{
+    "app": {
+        "name": "betterx docker"
+    },
+    "db": {
+        "host": "host.docker.internal"
+    },
+    "io": {
+        "url": "http://host.docker.internal:3004"
+    },
+    "aws": {
+        "bucket": "com.betterx.docker",
+        "connection": {
+            "endpoint": "http://host.docker.internal:4566"
+        }
+    }
+}

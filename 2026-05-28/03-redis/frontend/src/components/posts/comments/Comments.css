@@ -1,0 +1,6 @@
+.Comments {
+    border: 1px dashed pink;
+    display: flex;
+    flex-direction: column;
+    margin-top: 6px;
+}

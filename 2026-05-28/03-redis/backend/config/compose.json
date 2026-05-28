@@ -1,0 +1,22 @@
+{
+    "app": {
+        "name": "betterx compose"
+    },
+    "db": {
+        "host": "database"
+    },
+    "io": {
+        "url": "http://io:3004"
+    },
+    "aws": {
+        "bucket": "com.betterx.compose",
+        "connection": {
+            "endpoint": "http://localstack:4566"
+        }
+    },
+    "redis": {
+        "socket": {
+            "host": "redis"
+        }
+    }
+}
