@@ -21,7 +21,7 @@ export default function AddProduct() {
         })()
     }, [])    
 
-    const {register, handleSubmit, formState} = useForm<ProductDraft>()
+    const {register, handleSubmit} = useForm<ProductDraft>()
 
     const navigate = useNavigate()
 

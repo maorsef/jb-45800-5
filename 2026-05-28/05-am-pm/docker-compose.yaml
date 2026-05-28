@@ -2,7 +2,7 @@
 services:
   # docker run --name betterx-db -e=MYSQL_ALLOW_EMPTY_PASSWORD=1 -e=MYSQL_DATABASE=college -e=MYSQL_TCP_PORT=3306 -p 3306:3306 -d shaharsol/betterx-db:1.0
   database:
-    container_name: betterx-db-compose 
+    container_name: ampm-db-compose 
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=1
       - MYSQL_DATABASE=college
@@ -21,7 +21,7 @@ services:
       
   # docker run --name betterx-backend-p 3000:3000 -d shaharsol/betterx-backend:3.0
   backend:
-    container_name: betterx-backend-compose
+    container_name: ampm-backend-compose
     ports:
       - 3010:3000
     build:
@@ -33,7 +33,7 @@ services:
   
   # docker run --name betterx-front -p 6123:80 -d shaharsol/betterx-front:2.0
   frontend:
-    container_name: betterx-front-compose
+    container_name: ampm-front-compose
     ports:
       - 6124:80
     build: 
