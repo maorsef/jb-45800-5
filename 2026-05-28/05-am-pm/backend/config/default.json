@@ -12,6 +12,6 @@
         "port": 3306,
         "username": "root",
         "password": "",
-        "database": "{change me to the real db name}" 
+        "database": "ampm" 
     }
 }

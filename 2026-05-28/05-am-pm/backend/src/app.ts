@@ -5,6 +5,8 @@ import respondError from './middlewares/error/error-responder'
 import notFound from './middlewares/not-found'
 import cors from 'cors'
 import sequelize from './db/sequelize'
+import categoriesRouter from './routers/categories'
+import productsRouter from './routers/products'
 
 
 (async () => {
@@ -19,6 +21,8 @@ import sequelize from './db/sequelize'
     app.use('/', json())
 
     // load routers here...
+    app.use('/categories', categoriesRouter)
+    app.use('/products', productsRouter)
 
     // not found
     app.use('/', notFound)
