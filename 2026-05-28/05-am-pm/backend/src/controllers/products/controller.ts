@@ -29,3 +29,22 @@ export async function newProduct(request: Request<{}, {}, {name: string, manufac
         next(e)
     }
 }
+
+export async function deleteProduct(request: Request<{productId: string}, {}, {}>, response: Response, next: NextFunction) {
+    try {
+
+        const { productId } = request.params
+
+        const numberOfRowsDeleted = await Product.destroy({where: {id: productId}})
+
+        if(numberOfRowsDeleted === 0) return next({
+            status: 404,
+            message: 'you tried to delete an non-existing post'
+        })
+
+        response.json({ success: true })
+
+    } catch (e) {
+        next(e)
+    }
+}
