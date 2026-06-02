@@ -6,12 +6,13 @@ import { useForm } from 'react-hook-form'
 import SpinnerButton from '../../common/spinner-button/SpinnerButton'
 import { useAppDispatch } from '../../../redux/hooks'
 import { add } from '../../../redux/profile-slice'
-import { useState, type ChangeEvent } from 'react'
+import { useState, type ChangeEvent, type MouseEvent } from 'react'
 
 
 export default function NewPost() {
 
     const [previewImage, setPreviewImage] = useState<string>('')
+    const [isImproving, setIsImproving] = useState<boolean>(false)
 
     const dispatch = useAppDispatch()
 
@@ -41,6 +42,16 @@ export default function NewPost() {
     }
 
     const { handleSubmit, register, reset, formState } = useForm<PostDraft>()
+
+    async function improve(event: MouseEvent<HTMLButtonElement>) {
+        event.preventDefault()
+        try {
+            setIsImproving(true)
+            alert('not implemented')
+        } finally {
+            setIsImproving(false)
+        }
+    }
 
     return (
         <div className='NewPost'>
@@ -76,11 +87,19 @@ export default function NewPost() {
                 {!formState.isSubmitting && <button>Add Post</button>} */}
 
                 {/* becomes this (much more elegant and useful!): */}
-                <SpinnerButton 
-                    buttonText='Add Post'
-                    spinningText='posting new post...'
-                    isSpinning={formState.isSubmitting}
-                />
+                <div className='buttons'>
+                    <SpinnerButton 
+                        buttonText='Add Post'
+                        spinningText='posting new post...'
+                        isSpinning={formState.isSubmitting}
+                    />
+                    <SpinnerButton 
+                        buttonText='Improve'
+                        spinningText='improving your draft using AI'
+                        isSpinning={isImproving}
+                        onClick={improve}
+                    />
+                </div>
             </form>
         </div>
     )
