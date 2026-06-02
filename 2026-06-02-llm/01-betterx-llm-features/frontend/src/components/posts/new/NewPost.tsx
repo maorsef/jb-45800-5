@@ -1,6 +1,7 @@
 import useService from '../../../hooks/use-service'
 import type PostDraft from '../../../models/PostDraft'
 import ProfileService from '../../../services/auth-aware/ProfileService'
+import DraftsService from '../../../services/auth-aware/DraftsService'
 import './NewPost.css'
 import { useForm } from 'react-hook-form'
 import SpinnerButton from '../../common/spinner-button/SpinnerButton'
@@ -17,6 +18,7 @@ export default function NewPost() {
     const dispatch = useAppDispatch()
 
     const profileService = useService(ProfileService)
+    const draftsService = useService(DraftsService)
 
     async function createPost(draft: PostDraft) {
         try {
@@ -41,13 +43,15 @@ export default function NewPost() {
         setPreviewImage(URL.createObjectURL(file!))
     }
 
-    const { handleSubmit, register, reset, formState } = useForm<PostDraft>()
+    const { handleSubmit, register, reset, formState, getValues, setValue } = useForm<PostDraft>()
 
     async function improve(event: MouseEvent<HTMLButtonElement>) {
         event.preventDefault()
         try {
             setIsImproving(true)
-            alert('not implemented')
+            const body = getValues('body')
+            const { improved } = await draftsService.improve(body)
+            setValue('body', improved)
         } finally {
             setIsImproving(false)
         }
