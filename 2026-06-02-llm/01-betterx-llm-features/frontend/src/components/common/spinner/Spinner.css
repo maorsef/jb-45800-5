@@ -1,7 +1,14 @@
 .Spinner {
-    height: 100%;
-    margin: 0 auto;
-    text-align: center;
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: var(--space-8);
+}
+
+.Spinner img {
+  width: 40px;
+  height: 40px;
+  border-radius: 0;
+  opacity: 0.85;
 }
