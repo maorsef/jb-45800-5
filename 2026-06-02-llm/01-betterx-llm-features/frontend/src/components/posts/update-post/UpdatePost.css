@@ -1,12 +1,17 @@
 .UpdatePost {
-    border: 1px dashed green;
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e1e8ed;
+    padding: 16px;
 }
 
 .UpdatePost > form {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 .UpdatePost .error {
-    color: red;
+    color: #e0245e;
+    font-size: 13px;
 }

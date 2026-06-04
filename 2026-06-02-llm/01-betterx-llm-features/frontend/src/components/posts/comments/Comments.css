@@ -1,6 +1,8 @@
 .Comments {
-    border: 1px dashed pink;
+    border-top: 1px solid #e1e8ed;
     display: flex;
     flex-direction: column;
-    margin-top: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    gap: 6px;
 }

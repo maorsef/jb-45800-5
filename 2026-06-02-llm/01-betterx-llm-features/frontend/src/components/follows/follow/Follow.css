@@ -1,10 +1,28 @@
 .Follow {
     display: flex;
     flex-direction: column;
-    border: 1px dashed lightseagreen;
-    margin: 6px;
+    align-items: center;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    text-align: center;
+}
+
+.Follow:hover {
+    background-color: #f0f2f5;
 }
 
 .Follow img {
     height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e1e8ed;
+}
+
+.Follow span {
+    font-size: 12px;
+    margin-top: 4px;
+    color: #536471;
 }

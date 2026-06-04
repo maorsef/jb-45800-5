@@ -1,8 +1,24 @@
 .Header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+}
+
+.Header a {
+  text-decoration: none;
+  color: #536471;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 20px;
+  transition: background-color 0.2s;
+}
+
+.Header a:hover {
+  background-color: #f0f2f5;
 }
 
 .Header .active {
-  color: greenyellow;
+  color: #1d9bf0;
+  font-weight: 700;
 }
