@@ -6,14 +6,14 @@ import paramsValidation from "../middlewares/params-validation";
 import authEnforce from "../middlewares/auth-enforce";
 import filesValidation from "../middlewares/files-validation";
 import fileUploader from "../middlewares/file-uploader";
-import profanityPreventor from "../middlewares/profanity-preventor";
+import guidelinesViolationPreventor from "../middlewares/guidelines-violation-preventor";
 
 const profileRouter = Router()
 
 profileRouter.get('/', getProfile)
 profileRouter.get('/:postId', paramsValidation(getPostValidator) , getPost)
 profileRouter.delete('/:postId', paramsValidation(deletePostValidator), deletePost)
-profileRouter.post('/', bodyValidation(newPostValidator), profanityPreventor, filesValidation(newPostFilesValidator), fileUploader, createPost)
+profileRouter.post('/', bodyValidation(newPostValidator), guidelinesViolationPreventor, filesValidation(newPostFilesValidator), fileUploader, createPost)
 profileRouter.patch('/:postId', paramsValidation(updatePostParamsValidator), bodyValidation(updatePostValidator), updatePost)
 
 export default profileRouter;
