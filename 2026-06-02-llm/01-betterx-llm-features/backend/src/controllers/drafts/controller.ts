@@ -73,7 +73,7 @@ ${body}`
 
         const history = await ChatMessage.findAll({
             where: { chatId },
-            order: [['createdAt', 'ASC']]
+            order: [['createdAt', 'ASC'], ['role', 'DESC']]
         })
 
         const input: EasyInputMessage[] = [
@@ -99,10 +99,8 @@ ${body}`
             })
         }
 
-        await ChatMessage.bulkCreate([
-            { chatId, role: 'user', message: userContent },
-            { chatId, role: 'assistant', message: improved },
-        ])
+        await ChatMessage.create({ chatId, role: 'user', message: userContent })
+        await ChatMessage.create({ chatId, role: 'assistant', message: improved })
 
         response.json({
             original: body,
