@@ -37,10 +37,34 @@
     cursor: pointer;
 }
 
+.ContentGuidelinesModal-tabs {
+    display: flex;
+    gap: 0;
+    padding: 0 20px;
+    border-bottom: 1px solid #e1e8ed;
+}
+
+.ContentGuidelinesModal-tabs button {
+    padding: 12px 16px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: #657786;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+}
+
+.ContentGuidelinesModal-tabs button.active {
+    color: #1da1f2;
+    border-bottom-color: #1da1f2;
+}
+
 .ContentGuidelinesModal-content {
     padding: 20px;
     overflow-y: auto;
-    white-space: pre-wrap;
     font-size: 14px;
     line-height: 1.5;
+    white-space: pre-wrap;
 }

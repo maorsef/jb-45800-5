@@ -1,4 +1,4 @@
-export const contentGuidelinesText = `# Profanity and Offensive Language Policy
+export const profanityGuidelinesText = `# Profanity and Offensive Language Policy
 
 **Effective Date:** [Insert Date]
 
