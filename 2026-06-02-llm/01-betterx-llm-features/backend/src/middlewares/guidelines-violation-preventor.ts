@@ -24,7 +24,9 @@ export default async function guidelinesViolationPreventor(request: Request, res
             })
         }
 
-        const _closestContentGuideline = await findClosestContentGuideline(embedding)
+        const closestContentGuideline = await findClosestContentGuideline(embedding)
+
+        console.log('closest content guideline:', closestContentGuideline?.title)
 
         const systemPrompt = `
 ${allContentGuidelinesText}

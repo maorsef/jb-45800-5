@@ -1,13 +1,15 @@
 import './pgvector-sequelize'
-import pgvector from 'pgvector'
-import { QueryTypes, Sequelize } from "sequelize";
-import { Sequelize as SequelizeTypescript } from "sequelize-typescript";
+import { QueryTypes } from "sequelize";
+
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { toSql: vectorToSql } = require('pgvector') as { toSql: (value: number[]) => string }
+import { Sequelize } from "sequelize-typescript";
 import config from 'config'
 import ContentGuideline from "../models/ContentGuideline";
 import openai from "../openai/openai";
 import { contentGuidelineDocuments } from "../content-guidelines";
 
-const pgvector = new SequelizeTypescript({
+const pgvectorDb = new Sequelize({
     dialect: 'postgres',
     models: [ContentGuideline],
     logging: console.log,
@@ -40,13 +42,13 @@ export async function initGuidelinesEmbeddings() {
 }
 
 export async function findClosestContentGuideline(embedding: number[]): Promise<Pick<ContentGuideline, 'title' | 'text'> | null> {
-    const rows = await pgvector.query<Pick<ContentGuideline, 'title' | 'text'>>(
+    const rows = await pgvectorDb.query<Pick<ContentGuideline, 'title' | 'text'>>(
         `SELECT title, text
          FROM content_guidelines
          ORDER BY vector <=> $1
          LIMIT 1`,
         {
-            bind: [pgvector.toSql(embedding)],
+            bind: [vectorToSql(embedding)],
             type: QueryTypes.SELECT,
         }
     )
@@ -54,4 +56,4 @@ export async function findClosestContentGuideline(embedding: number[]): Promise<
     return rows[0] ?? null
 }
 
-export default pgvector
+export default pgvectorDb
