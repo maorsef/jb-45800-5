@@ -1,11 +1,13 @@
 import './pgvector-sequelize'
-import { Sequelize } from "sequelize-typescript";
+import pgvector from 'pgvector'
+import { QueryTypes, Sequelize } from "sequelize";
+import { Sequelize as SequelizeTypescript } from "sequelize-typescript";
 import config from 'config'
 import ContentGuideline from "../models/ContentGuideline";
 import openai from "../openai/openai";
 import { contentGuidelineDocuments } from "../content-guidelines";
 
-const pgvector = new Sequelize({
+const pgvector = new SequelizeTypescript({
     dialect: 'postgres',
     models: [ContentGuideline],
     logging: console.log,
@@ -35,6 +37,21 @@ export async function initGuidelinesEmbeddings() {
 
         console.log(`stored embedding for content guideline: ${document.subject}`)
     }
+}
+
+export async function findClosestContentGuideline(embedding: number[]): Promise<Pick<ContentGuideline, 'title' | 'text'> | null> {
+    const rows = await pgvector.query<Pick<ContentGuideline, 'title' | 'text'>>(
+        `SELECT title, text
+         FROM content_guidelines
+         ORDER BY vector <=> $1
+         LIMIT 1`,
+        {
+            bind: [pgvector.toSql(embedding)],
+            type: QueryTypes.SELECT,
+        }
+    )
+
+    return rows[0] ?? null
 }
 
 export default pgvector

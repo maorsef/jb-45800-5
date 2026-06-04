@@ -2,10 +2,29 @@ import type { NextFunction, Request, Response } from "express";
 import openai from "../openai/openai";
 import type { EasyInputMessage } from "openai/resources/responses/responses";
 import { allContentGuidelinesText } from "../content-guidelines";
+import { findClosestContentGuideline } from "../db/pgvector";
 
 export default async function guidelinesViolationPreventor(request: Request, response: Response, next: NextFunction) {
     try {
         const { title, body } = request.body as { title: string, body: string }
+
+        const postText = `${title}\n\n${body}`
+
+        const embeddingsResponse = await openai.embeddings.create({
+            model: 'text-embedding-3-small',
+            input: postText,
+        })
+
+        const embedding = embeddingsResponse.data[0]?.embedding
+
+        if (!embedding) {
+            return next({
+                status: 500,
+                message: 'could not create embedding for post content'
+            })
+        }
+
+        const _closestContentGuideline = await findClosestContentGuideline(embedding)
 
         const systemPrompt = `
 ${allContentGuidelinesText}
