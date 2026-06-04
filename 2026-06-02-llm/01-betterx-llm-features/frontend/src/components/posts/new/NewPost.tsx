@@ -5,6 +5,7 @@ import DraftsService from '../../../services/auth-aware/DraftsService'
 import './NewPost.css'
 import { useForm } from 'react-hook-form'
 import SpinnerButton from '../../common/spinner-button/SpinnerButton'
+import ContentGuidelinesModal from './ContentGuidelinesModal'
 import { useAppDispatch } from '../../../redux/hooks'
 import { add } from '../../../redux/profile-slice'
 import { useRef, useState, type ChangeEvent, type MouseEvent } from 'react'
@@ -20,6 +21,7 @@ export default function NewPost() {
     const [isImproving, setIsImproving] = useState<boolean>(false)
     const [isGeneratingPic, setIsGeneratingPic] = useState<boolean>(false)
     const [isUserImproving, setIsUserImproving] = useState<boolean>(false)
+    const [guidelinesOpen, setGuidelinesOpen] = useState<boolean>(false)
 
     const dispatch = useAppDispatch()
 
@@ -179,6 +181,16 @@ export default function NewPost() {
                     isSpinning={isUserImproving}
                 />
             </form>
+
+            <button
+                type="button"
+                className='content-guidelines-link'
+                onClick={() => setGuidelinesOpen(true)}
+            >
+                content guidelines
+            </button>
+
+            {guidelinesOpen && <ContentGuidelinesModal onClose={() => setGuidelinesOpen(false)} />}
         </div>
     )
 }

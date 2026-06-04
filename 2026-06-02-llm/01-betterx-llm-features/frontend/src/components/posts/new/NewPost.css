@@ -30,3 +30,15 @@
     align-items: center;
     flex-wrap: wrap;
 }
+
+.NewPost .content-guidelines-link {
+    margin-top: 12px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: #1da1f2;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: underline;
+    align-self: flex-start;
+}

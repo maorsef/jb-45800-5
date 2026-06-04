@@ -1,0 +1,46 @@
+.ContentGuidelinesModal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+}
+
+.ContentGuidelinesModal {
+    background: #ffffff;
+    border-radius: 12px;
+    max-width: 720px;
+    width: 100%;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.ContentGuidelinesModal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e1e8ed;
+}
+
+.ContentGuidelinesModal-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.ContentGuidelinesModal-header button {
+    cursor: pointer;
+}
+
+.ContentGuidelinesModal-content {
+    padding: 20px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-size: 14px;
+    line-height: 1.5;
+}
