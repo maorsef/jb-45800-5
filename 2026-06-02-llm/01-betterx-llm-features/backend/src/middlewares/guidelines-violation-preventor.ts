@@ -1,7 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import openai from "../openai/openai";
 import type { EasyInputMessage } from "openai/resources/responses/responses";
-import { allContentGuidelinesText } from "../content-guidelines";
 import { findClosestContentGuideline } from "../db/pgvector";
 
 export default async function guidelinesViolationPreventor(request: Request, response: Response, next: NextFunction) {
@@ -26,18 +25,25 @@ export default async function guidelinesViolationPreventor(request: Request, res
 
         const closestContentGuideline = await findClosestContentGuideline(embedding)
 
-        console.log('closest content guideline:', closestContentGuideline?.title)
+        if (!closestContentGuideline) {
+            return next({
+                status: 500,
+                message: 'could not find a content guideline for moderation'
+            })
+        }
+
+        console.log('closest content guideline:', closestContentGuideline.title)
 
         const systemPrompt = `
-${allContentGuidelinesText}
+${closestContentGuideline.text}
 
 ---
 You are a content moderation assistant.
 You will receive a post title and body.
-Evaluate the content against all policies above (profanity, medical, and cryptocurrency/financial).
+Evaluate the content against the policy above (${closestContentGuideline.title}).
 
-Return ONLY the word "true" if the content violates any policy and is not safe to publish.
-Return ONLY the word "false" if the content is safe to publish per all policies.
+Return ONLY the word "true" if the content violates the policy and is not safe to publish.
+Return ONLY the word "false" if the content is safe to publish per the policy.
 `.trim()
 
         const userContent = `Title:
@@ -67,6 +73,8 @@ ${body}`
         }
 
         const result = llmResponse.output_text?.trim().toLowerCase()
+
+        console.log('guidelines violation check result:', result)
 
         if (result === 'true') {
             return next({
