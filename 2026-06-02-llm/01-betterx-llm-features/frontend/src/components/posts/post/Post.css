@@ -1,19 +1,39 @@
 .Post {
-    padding: 6px;
-    border: 1px dashed lightsalmon;
+    padding: 16px;
+    background-color: #ffffff;
+    border: 1px solid #e1e8ed;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.Post > img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 8px 0;
+    max-height: 400px;
+    object-fit: cover;
 }
 
 .Post > .by-line {
-    font-size: small;
-    margin-bottom: 6px;
+    font-size: 13px;
+    color: #536471;
+    margin-bottom: 8px;
 }
 
 .Post .delete-button {
-    background-color: red;
+    background-color: #e0245e;
     color: white;
 }
 
+.Post .delete-button:hover {
+    background-color: #c01f52;
+}
+
 .Post .update-button {
-    background-color: green;
+    background-color: #00ba7c;
     color: white;
+}
+
+.Post .update-button:hover {
+    background-color: #00a36c;
 }

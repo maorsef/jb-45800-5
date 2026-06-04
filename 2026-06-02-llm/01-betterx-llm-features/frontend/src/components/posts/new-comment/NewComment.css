@@ -1,3 +1,15 @@
+.NewComment {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-top: 8px;
+}
+
+.NewComment input, .NewComment textarea {
+    flex: 1;
+}
+
 .NewComment .error {
-    color: red;
+    color: #e0245e;
+    font-size: 13px;
 }

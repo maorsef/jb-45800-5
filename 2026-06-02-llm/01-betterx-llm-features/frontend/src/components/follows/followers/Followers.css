@@ -1,4 +1,15 @@
 .Followers {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  padding: 8px;
+  gap: 4px;
+}
+
+.Followers h3 {
+  width: 100%;
+  font-size: 13px;
+  color: #536471;
+  margin: 0 0 4px 0;
+  padding: 0 8px;
 }
