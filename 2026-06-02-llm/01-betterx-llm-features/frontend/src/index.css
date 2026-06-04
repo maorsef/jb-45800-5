@@ -1,264 +1,46 @@
-/* ==========================================================================
-   BetterX — Global design system
-   ========================================================================== */
-
-:root {
-  /* Colors */
-  --color-bg: #f0f2f8;
-  --color-bg-gradient-start: #eef1f9;
-  --color-bg-gradient-end: #e8ecf6;
-  --color-surface: #ffffff;
-  --color-surface-elevated: #ffffff;
-  --color-primary: #5b6cf0;
-  --color-primary-hover: #4a5ae8;
-  --color-primary-muted: rgba(91, 108, 240, 0.12);
-  --color-danger: #e5484d;
-  --color-danger-hover: #d43d42;
-  --color-danger-muted: rgba(229, 72, 77, 0.1);
-  --color-success: #30a46c;
-  --color-success-hover: #2b9662;
-  --color-text: #1a1d26;
-  --color-text-muted: #5c6370;
-  --color-text-subtle: #8b929e;
-  --color-border: #e2e6ef;
-  --color-border-strong: #cdd3e0;
-  --color-focus-ring: rgba(91, 108, 240, 0.45);
-
-  /* Spacing */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-
-  /* Typography */
-  --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
-  --line-height-tight: 1.25;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.65;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-
-  /* Shape */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-full: 9999px;
-
-  /* Shadows */
-  --shadow-xs: 0 1px 2px rgba(26, 29, 38, 0.04);
-  --shadow-sm: 0 2px 8px rgba(26, 29, 38, 0.06);
-  --shadow-md: 0 4px 20px rgba(26, 29, 38, 0.08);
-  --shadow-lg: 0 12px 40px rgba(26, 29, 38, 0.1);
-
-  /* Motion */
-  --transition-fast: 150ms ease;
-  --transition-base: 220ms ease;
-
-  /* Layout */
-  --content-max-width: 720px;
-  --sidebar-width: 280px;
-}
-
-/* Reset */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
 body {
-  font-family: var(--font-family);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-normal);
-  color: var(--color-text);
-  background: linear-gradient(160deg, var(--color-bg-gradient-start) 0%, var(--color-bg-gradient-end) 50%, var(--color-bg) 100%);
-  background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #f0f2f5;
+    color: #1a1a2e;
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  margin: 0 0 var(--space-3);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-tight);
-  color: var(--color-text);
-}
-
-h4 {
-  font-size: var(--font-size-lg);
-}
-
-p {
-  margin: 0 0 var(--space-3);
-}
-
-/* Links */
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-a:hover {
-  color: var(--color-primary-hover);
-}
-
-a:focus-visible {
-  outline: 2px solid var(--color-focus-ring);
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
-}
-
-/* Forms — shared base */
-input,
-textarea,
-button,
-select {
-  font-family: inherit;
-  font-size: var(--font-size-base);
-}
-
-input[type='text'],
-input[type='password'],
-input[type='email'],
-input:not([type]),
-textarea {
-  width: 100%;
-  padding: var(--space-3) var(--space-4);
-  color: var(--color-text);
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: var(--color-text-subtle);
-}
-
-input:hover,
-textarea:hover {
-  border-color: var(--color-border-strong);
-}
-
-input:focus,
-textarea:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px var(--color-focus-ring);
-}
-
-textarea {
-  min-height: 120px;
-  resize: vertical;
-  line-height: var(--line-height-relaxed);
-}
-
-input[type='file'] {
-  width: 100%;
-  padding: var(--space-3);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-  background: var(--color-primary-muted);
-  border: 1px dashed var(--color-border-strong);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-}
-
-input[type='file']:focus-visible {
-  outline: 2px solid var(--color-focus-ring);
-  outline-offset: 2px;
-}
-
-/* Buttons */
 button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  padding: var(--space-3) var(--space-5);
-  font-weight: var(--font-weight-medium);
-  color: #fff;
-  background: var(--color-primary);
-  border: none;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    cursor: pointer;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #1d9bf0;
+    color: white;
+    font-weight: 600;
+    transition: background-color 0.2s;
 }
 
 button:hover {
-  background: var(--color-primary-hover);
+    background-color: #1a8cd8;
 }
 
-button:active {
-  transform: translateY(1px);
+input, textarea {
+    padding: 10px 12px;
+    border: 1px solid #cfd9de;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
 }
 
-button:focus-visible {
-  outline: 2px solid var(--color-focus-ring);
-  outline-offset: 2px;
+input:focus, textarea:focus {
+    border-color: #1d9bf0;
 }
 
-button:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* Form errors */
-.error {
-  min-height: 1.25rem;
-  margin-top: var(--space-1);
-  margin-bottom: var(--space-2);
-  font-size: var(--font-size-sm);
-  color: var(--color-danger);
-}
-
-/* Images in content */
-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: var(--radius-md);
-}
-
-/* Scrollbars (webkit) */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-border-strong);
-  border-radius: var(--radius-full);
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
+textarea {
+    resize: vertical;
+    min-height: 80px;
 }

@@ -7,15 +7,19 @@ import { useForm } from 'react-hook-form'
 import SpinnerButton from '../../common/spinner-button/SpinnerButton'
 import { useAppDispatch } from '../../../redux/hooks'
 import { add } from '../../../redux/profile-slice'
-import { useState, type ChangeEvent, type MouseEvent } from 'react'
+import { useRef, useState, type ChangeEvent, type MouseEvent } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
 
 export default function NewPost() {
+
+    const chatIdRef = useRef<string>(uuidv4())
 
     const [previewImage, setPreviewImage] = useState<string>('')
     const [aiImageFile, setAiImageFile] = useState<File | null>(null)
     const [isImproving, setIsImproving] = useState<boolean>(false)
     const [isGeneratingPic, setIsGeneratingPic] = useState<boolean>(false)
+    const [isUserImproving, setIsUserImproving] = useState<boolean>(false)
 
     const dispatch = useAppDispatch()
 
@@ -57,6 +61,13 @@ export default function NewPost() {
 
     const { handleSubmit, register, reset, formState, getValues, setValue } = useForm<PostDraft>()
 
+    const {
+        handleSubmit: handleUserImproveSubmit,
+        register: registerUserImprove,
+        reset: resetUserImprove,
+        formState: userImproveFormState,
+    } = useForm<{ prompt: string }>()
+
     async function improve(event: MouseEvent<HTMLButtonElement>) {
         event.preventDefault()
         try {
@@ -83,6 +94,18 @@ export default function NewPost() {
             setPreviewImage(dataUrl)
         } finally {
             setIsGeneratingPic(false)
+        }
+    }
+
+    async function userImprove(values: { prompt: string }) {
+        try {
+            setIsUserImproving(true)
+            const body = getValues('body')
+            const { improved } = await draftsService.userImprove(body, values.prompt, chatIdRef.current)
+            setValue('body', improved)
+            resetUserImprove()
+        } finally {
+            setIsUserImproving(false)
         }
     }
 
@@ -139,6 +162,22 @@ export default function NewPost() {
                         onClick={generatePic}
                     />
                 </div>
+            </form>
+
+            <form className='UserImprove' onSubmit={handleUserImproveSubmit(userImprove)}>
+                <textarea placeholder='how should we improve it?' {...registerUserImprove('prompt', {
+                    required: {
+                        value: true,
+                        message: 'prompt is a required field'
+                    }
+                })}></textarea>
+                <div className='error'>{userImproveFormState.errors.prompt?.message}</div>
+
+                <SpinnerButton
+                    buttonText='User Improve'
+                    spinningText='improving your draft using your instructions'
+                    isSpinning={isUserImproving}
+                />
             </form>
         </div>
     )

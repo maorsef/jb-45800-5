@@ -1,25 +1,19 @@
 .PostComment {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-4);
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  transition: border-color var(--transition-fast);
-}
-
-.PostComment:hover {
-  border-color: var(--color-border-strong);
+    display: flex;
+    flex-direction: column;
+    background-color: #f7f9f9;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 4px 0;
 }
 
 .PostComment > .comment-body {
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-relaxed);
-  color: var(--color-text);
+    font-size: 14px;
+    color: #1a1a2e;
 }
 
 .PostComment > .comment-by-line {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-subtle);
+    font-size: 12px;
+    color: #536471;
+    margin-top: 4px;
 }

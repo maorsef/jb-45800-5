@@ -3,77 +3,24 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-4);
-  padding: var(--space-4) var(--space-6);
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
-  box-shadow: var(--shadow-xs);
-}
-
-.Header > div:first-child {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: -0.02em;
-  color: var(--color-primary);
-}
-
-.Header > div:nth-child(2) {
-  display: flex;
   align-items: center;
-  gap: var(--space-1);
-  font-size: 0; /* hide "|" text separators between NavLinks */
+  padding: 12px 24px;
 }
 
-.Header > div:nth-child(2) a {
-  font-size: var(--font-size-sm);
-  padding: var(--space-2) var(--space-4);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-muted);
-  border-radius: var(--radius-md);
-  transition: color var(--transition-fast), background var(--transition-fast);
+.Header a {
+  text-decoration: none;
+  color: #536471;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 20px;
+  transition: background-color 0.2s;
 }
 
-.Header > div:nth-child(2) a:hover {
-  color: var(--color-text);
-  background: var(--color-primary-muted);
+.Header a:hover {
+  background-color: #f0f2f5;
 }
 
-.Header > div:nth-child(2) a.active {
-  color: var(--color-primary);
-  background: var(--color-primary-muted);
-}
-
-.Header > div:last-child {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-3);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-muted);
-}
-
-.Header > div:last-child button {
-  padding: var(--space-2) var(--space-4);
-  font-size: var(--font-size-sm);
-  background: transparent;
-  color: var(--color-text-muted);
-  border: 1px solid var(--color-border);
-}
-
-.Header > div:last-child button:hover {
-  color: var(--color-danger);
-  background: var(--color-danger-muted);
-  border-color: transparent;
-}
-
-@media (max-width: 640px) {
-  .Header {
-    padding: var(--space-4);
-  }
-
-  .Header > div:nth-child(2) {
-    order: 3;
-    width: 100%;
-    justify-content: center;
-  }
+.Header .active {
+  color: #1d9bf0;
+  font-weight: 700;
 }

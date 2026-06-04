@@ -1,14 +1,15 @@
-.NewComment form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+.NewComment {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-top: 8px;
 }
 
-.NewComment textarea {
-  min-height: 80px;
-  font-size: var(--font-size-sm);
+.NewComment input, .NewComment textarea {
+    flex: 1;
 }
 
-.NewComment .SpinnerButtton button {
-  align-self: flex-start;
+.NewComment .error {
+    color: #e0245e;
+    font-size: 13px;
 }
