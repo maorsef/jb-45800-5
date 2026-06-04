@@ -6,6 +6,7 @@ import notFound from './middlewares/not-found'
 import profileRouter from './routers/profile'
 import feedRouter from './routers/feed'
 import sequelize from './db/sequelize'
+import pgvector, { initGuidelinesEmbeddings } from './db/pgvector'
 import followsRouter from './routers/follows'
 import authRouter from './routers/auth'
 import authEnforce from './middlewares/auth-enforce'
@@ -47,7 +48,11 @@ import draftsRouter from './routers/drafts'
     // and create all missing tables
     // using {force: true} is SUPER SUPER SUPER dangerous!!!
     // especially in production
-    await sequelize.sync({force: !!config.get('app.sync.force')})
+    const syncForce = !!config.get('app.sync.force')
+
+    await sequelize.sync({ force: syncForce })
+    await pgvector.sync({ force: syncForce })
+    await initGuidelinesEmbeddings()
 
     // make sure i have s3 bucket
     // that is, create the s3 bucket if it does not exist already

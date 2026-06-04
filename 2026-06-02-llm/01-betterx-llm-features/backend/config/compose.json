@@ -5,6 +5,9 @@
     "db": {
         "host": "database"
     },
+    "pgvector": {
+        "host": "pgvector"
+    },
     "io": {
         "url": "http://io:3004"
     },

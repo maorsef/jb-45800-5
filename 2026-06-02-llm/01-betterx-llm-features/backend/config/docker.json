@@ -5,6 +5,9 @@
     "db": {
         "host": "host.docker.internal"
     },
+    "pgvector": {
+        "host": "host.docker.internal"
+    },
     "io": {
         "url": "http://host.docker.internal:3004"
     },

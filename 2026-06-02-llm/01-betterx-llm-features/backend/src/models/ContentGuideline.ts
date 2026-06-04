@@ -1,4 +1,11 @@
+import '../db/pgvector-sequelize'
+import { DataTypes } from 'sequelize'
 import { AllowNull, Column, DataType, Model, PrimaryKey, Table } from "sequelize-typescript";
+
+type PgvectorDataTypes = typeof DataTypes & {
+    VECTOR: (dimensions?: number) => ReturnType<typeof DataTypes.ABSTRACT>
+}
+const embeddingVectorType = (DataTypes as PgvectorDataTypes).VECTOR(1536)
 
 @Table({
     underscored: true,
@@ -17,7 +24,7 @@ export default class ContentGuideline extends Model {
 
     @AllowNull(false)
     @Column({
-        type: 'vector(1536)',
+        type: embeddingVectorType,
     })
     vector: number[]
 }

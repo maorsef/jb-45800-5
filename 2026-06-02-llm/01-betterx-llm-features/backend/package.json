@@ -25,6 +25,8 @@
     "jsonwebtoken": "^9.0.3",
     "mysql2": "^3.22.3",
     "openai": "^6.41.0",
+    "pg": "^8.21.0",
+    "pgvector": "^0.3.0",
     "sequelize-typescript": "^2.1.6",
     "socket-enums-shaharsol-xyz": "^2.0.0",
     "socket.io-client": "^4.8.3"
