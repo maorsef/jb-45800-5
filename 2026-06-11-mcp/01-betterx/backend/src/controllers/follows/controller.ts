@@ -4,6 +4,8 @@ import Follow from "../../models/Follow";
 import { followersIncludes, followingIncludes } from "../includes";
 import socket from "../../io/io";
 import { SocketMessages } from "socket-enums-shaharsol-xyz";
+import { findSuggestedUserIds } from "../../db/pgvector";
+import { Op } from "sequelize";
 
 
 export async function getFollowers(request: Request, response: Response, next: NextFunction) {
@@ -24,7 +26,26 @@ export async function suggest(request: Request, response: Response, next: NextFu
     try {
         const { userId } = request
 
-        response.json([])
+        const suggestedUserIds = await findSuggestedUserIds(userId)
+
+        if (suggestedUserIds.length === 0) {
+            return response.json([])
+        }
+
+        const suggestedUsers = await User.findAll({
+            where: {
+                id: {
+                    [Op.in]: suggestedUserIds
+                }
+            }
+        })
+
+        const usersById = new Map(suggestedUsers.map(user => [user.id, user]))
+        const orderedSuggestions = suggestedUserIds
+            .map(id => usersById.get(id))
+            .filter((user): user is User => !!user)
+
+        response.json(orderedSuggestions)
     } catch (e) {
         next(e)
     }

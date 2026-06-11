@@ -109,6 +109,33 @@ export async function initPostEmbeddings() {
     }
 }
 
+export async function findSuggestedUserIds(userId: string): Promise<string[]> {
+    const rows = await pgvectorDb.query<{ userId: string }>(
+        `WITH my_avg AS (
+            SELECT avg(vector) AS vector
+            FROM post_embeddings
+            WHERE user_id = $1
+        ),
+        other_user_avgs AS (
+            SELECT user_id, avg(vector) AS vector
+            FROM post_embeddings
+            WHERE user_id != $1
+            GROUP BY user_id
+        )
+        SELECT other_user_avgs.user_id AS "userId"
+        FROM other_user_avgs, my_avg
+        WHERE my_avg.vector IS NOT NULL
+        ORDER BY other_user_avgs.vector <=> my_avg.vector
+        LIMIT 2`,
+        {
+            bind: [userId],
+            type: QueryTypes.SELECT,
+        }
+    )
+
+    return rows.map(({ userId }) => userId)
+}
+
 export async function findClosestContentGuideline(embedding: number[]): Promise<Pick<ContentGuideline, 'title' | 'text'> | null> {
     const rows = await pgvectorDb.query<Pick<ContentGuideline, 'title' | 'text'>>(
         `SELECT title, text
