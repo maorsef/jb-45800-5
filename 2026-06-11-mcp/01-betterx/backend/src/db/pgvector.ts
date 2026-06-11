@@ -6,12 +6,14 @@ const { toSql: vectorToSql } = require('pgvector') as { toSql: (value: number[])
 import { Sequelize } from "sequelize-typescript";
 import config from 'config'
 import ContentGuideline from "../models/ContentGuideline";
+import PostEmbedding from "../models/PostEmbedding";
+import Post from "../models/Post";
 import openai from "../openai/openai";
 import { contentGuidelineDocuments } from "../content-guidelines";
 
 const pgvectorDb = new Sequelize({
     dialect: 'postgres',
-    models: [ContentGuideline],
+    models: [ContentGuideline, PostEmbedding],
     logging: console.log,
     ...config.get('pgvector')
 })
@@ -38,6 +40,44 @@ export async function initGuidelinesEmbeddings() {
         })
 
         console.log(`stored embedding for content guideline: ${document.subject}`)
+    }
+}
+
+export async function initPostEmbeddings() {
+    const posts = await Post.findAll({
+        attributes: ['id', 'userId', 'title', 'body'],
+    })
+
+    const existingEmbeddings = await PostEmbedding.findAll({
+        attributes: ['postId'],
+    })
+    const existingPostIds = new Set(existingEmbeddings.map(({ postId }) => postId))
+
+    for (const post of posts) {
+        if (existingPostIds.has(post.id)) {
+            continue
+        }
+
+        const postText = `${post.title}\n\n${post.body}`
+
+        const embeddingsResponse = await openai.embeddings.create({
+            model: 'text-embedding-3-small',
+            input: postText,
+        })
+
+        const vector = embeddingsResponse.data[0]?.embedding
+
+        if (!vector) {
+            throw new Error(`could not create embedding for post ${post.id}`)
+        }
+
+        await PostEmbedding.create({
+            postId: post.id,
+            userId: post.userId,
+            vector,
+        })
+
+        console.log(`stored embedding for post: ${post.id}`)
     }
 }
 
