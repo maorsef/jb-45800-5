@@ -13,13 +13,12 @@ export default function Following() {
   const [isLoaded, setIsLoaded] = useState<boolean>(false)
 
   const followingService = useService(FollowingService)
-  
+
   const dispatch = useAppDispatch()
   const following = useAppSelector(state => state.followingSlice.following)
 
   useEffect(() => {
-
-    (async() => {
+    (async () => {
       try {
         setIsLoading(true)
         const following = await followingService.getFollowing()
@@ -30,24 +29,31 @@ export default function Following() {
         alert(e)
       } finally {
         setIsLoading(false)
-
       }
     })()
   }, [])
 
   return (
     <div className='Following'>
+      <h3 className='section-title'>Following</h3>
 
       {isLoading && <Spinner />}
 
-      {!isLoading && !isLoaded && <h4>error loading following...</h4>}
+      {!isLoading && !isLoaded && (
+        <p className='empty-state'>Could not load following</p>
+      )}
 
-      {!isLoading && isLoaded && <>
-        {following.map(follow => <Follow 
-          key={follow.id} 
-          user={follow}
-        />)}
-      </>}
+      {!isLoading && isLoaded && following.length === 0 && (
+        <p className='empty-state'>Not following anyone yet</p>
+      )}
+
+      {!isLoading && isLoaded && following.length > 0 && (
+        <div className='Following-list'>
+          {following.map(follow => (
+            <Follow key={follow.id} user={follow} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import './Profile.css'
-// import profileService from '../../../services/profile'
 import Post from '../post/Post'
 import NewPost from '../new/NewPost'
 import Spinner from '../../common/spinner/Spinner'
@@ -20,14 +19,9 @@ export default function Profile() {
     const profileService = useService(ProfileService)
 
     useEffect(() => {
-
-        // profileService.getProfile()
-        //     .then(profile => setProfile(profile.sort((a: PostModel, b: PostModel) => a.createdAt < b.createdAt ? 1 : -1)))
-        //     .catch(e => alert(e.message))
-
-        (async() => {
+        (async () => {
             try {
-                if(profile.length > 0) {
+                if (profile.length > 0) {
                     setIsLoaded(true)
                 } else {
                     setIsLoading(true)
@@ -41,28 +35,28 @@ export default function Profile() {
             } finally {
                 setIsLoading(false)
             }
-        })()        
+        })()
     }, [])
 
     return (
         <div className='Profile'>
+            <header className='page-header'>
+                <h2 className='page-title'>Your Profile</h2>
+                <p className='page-subtitle'>Create posts and manage your content</p>
+            </header>
 
             {isLoading && <Spinner />}
 
             {!isLoading && isLoaded && <>
                 <NewPost />
-                {profile.map(post => <Post 
-                    key={post.id} 
-                    post={post} 
-                    isReadOnly={false} 
-                />)}
+                {profile.map(post => (
+                    <Post key={post.id} post={post} isReadOnly={false} />
+                ))}
             </>}
 
-            {!isLoading && !isLoaded && <div>
-                <h4>error loading data...</h4>
-            </div>}
-
-            
+            {!isLoading && !isLoaded && (
+                <p className='empty-state'>Something went wrong loading your profile.</p>
+            )}
         </div>
     )
 }

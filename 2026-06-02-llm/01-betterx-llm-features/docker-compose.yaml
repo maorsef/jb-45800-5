@@ -72,11 +72,15 @@ services:
     container_name: betterx-backend-compose
     ports:
       - 3000:3000
+    environment:
+      - BETTERX_OPENAI_API_KEY=${BETTERX_OPENAI_API_KEY}
     build:
       context: ./backend
       dockerfile: Dockerfile.compose
     depends_on:
       database:
+        condition: service_healthy
+      pgvector:
         condition: service_healthy
   
   # docker run --name betterx-front -p 6123:80 -d shaharsol/betterx-front:2.0

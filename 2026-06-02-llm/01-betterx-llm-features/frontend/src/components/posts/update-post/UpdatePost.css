@@ -1,17 +1,29 @@
 .UpdatePost {
-    background-color: #ffffff;
-    border-radius: 12px;
-    border: 1px solid #e1e8ed;
-    padding: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-card);
+  max-width: var(--content-max-width);
 }
 
-.UpdatePost > form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.UpdatePost-heading {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
-.UpdatePost .error {
-    color: #e0245e;
-    font-size: 13px;
+.UpdatePost-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.UpdatePost-form button[type="submit"] {
+  align-self: flex-start;
+  margin-top: var(--space-2);
+  padding: var(--space-3) var(--space-6);
 }

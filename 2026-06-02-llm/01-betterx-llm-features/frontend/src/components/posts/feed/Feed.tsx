@@ -15,11 +15,7 @@ export default function Feed() {
     const feedService = useService(FeedService)
 
     useEffect(() => {
-        // feedService.getFeed()
-        //     .then(setFeed)
-        //     .catch(e => alert(e.message))
-
-        (async() => {
+        (async () => {
             try {
                 setIsLoading(true)
                 const posts = await feedService.getFeed()
@@ -31,25 +27,29 @@ export default function Feed() {
             } finally {
                 setIsLoading(false)
             }
-        })()        
+        })()
     }, [])
 
     return (
         <div className='Feed'>
+            <header className='page-header'>
+                <h2 className='page-title'>Your Feed</h2>
+                <p className='page-subtitle'>Posts from people you follow</p>
+            </header>
 
             {isLoading && <Spinner />}
 
-            {!isLoading && isLoaded && <>
-                {feed.map(post => <Post 
-                    key={post.id} 
-                    post={post} 
-                    isReadOnly={true}
-                />)}
-            </>}
+            {!isLoading && isLoaded && feed.length === 0 && (
+                <p className='empty-state'>Your feed is empty. Follow someone to see their posts here.</p>
+            )}
 
-            {!isLoading && !isLoaded && <div>
-                <h4>error loading data...</h4>
-            </div>}
+            {!isLoading && isLoaded && feed.map(post => (
+                <Post key={post.id} post={post} isReadOnly={true} />
+            ))}
+
+            {!isLoading && !isLoaded && (
+                <p className='empty-state'>Something went wrong loading your feed.</p>
+            )}
         </div>
     )
 }

@@ -1,32 +1,94 @@
 .NewPost {
-    background-color: #ffffff;
-    border-radius: 12px;
-    border: 1px solid #e1e8ed;
-    padding: 16px;
-    margin-bottom: 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+  box-shadow: var(--shadow-card);
 }
 
-.NewPost > form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.NewPost-heading {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border-subtle);
 }
 
-.NewPost > form img {
-    max-width: 100%;
-    border-radius: 8px;
-    max-height: 300px;
-    object-fit: cover;
+.NewPost-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
 }
 
-.NewPost .error {
-    color: #e0245e;
-    font-size: 13px;
+.NewPost-preview {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg);
+  aspect-ratio: 16 / 9;
+  max-height: 300px;
+  border: 1px solid var(--color-border-subtle);
 }
 
-.NewPost .buttons {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
+.NewPost-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.NewPost-actions {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.NewPost-assistant {
+  margin-top: var(--space-6);
+  padding: var(--space-5);
+  background: linear-gradient(135deg, var(--color-ai-bg) 0%, rgba(239, 246, 255, 0.8) 100%);
+  border: 1px solid var(--color-ai-border);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.NewPost-assistant::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-ai);
+}
+
+.NewPost-assistant-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-ai);
+  margin-bottom: var(--space-1);
+  letter-spacing: 0.02em;
+}
+
+.NewPost-assistant-desc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+  line-height: var(--line-height-relaxed);
+}
+
+.UserImprove {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.NewPost-guidelines {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-sm);
+  padding: var(--space-2) var(--space-3);
 }

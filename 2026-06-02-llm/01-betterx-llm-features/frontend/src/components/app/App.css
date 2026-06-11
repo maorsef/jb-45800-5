@@ -1,5 +1,1 @@
-/* App shell — minimal global helpers */
-
-#root {
-  min-height: 100%;
-}
+/* App-level overrides — design system lives in index.css */

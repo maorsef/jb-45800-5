@@ -1,19 +1,26 @@
 .PostComment {
-    display: flex;
-    flex-direction: column;
-    background-color: #f7f9f9;
-    border-radius: 8px;
-    padding: 8px 12px;
-    margin: 4px 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
 }
 
-.PostComment > .comment-body {
-    font-size: 14px;
-    color: #1a1a2e;
+.PostComment:hover {
+  border-color: var(--color-border);
+  background: var(--color-surface);
 }
 
-.PostComment > .comment-by-line {
-    font-size: 12px;
-    color: #536471;
-    margin-top: 4px;
+.PostComment .comment-body {
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+}
+
+.PostComment .comment-by-line {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-subtle);
+  margin-top: var(--space-2);
 }

@@ -2,13 +2,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 120px;
-  padding: var(--space-8);
+  min-height: 80px;
+  padding: var(--space-6);
 }
 
 .Spinner img {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 0;
-  opacity: 0.85;
+  opacity: 0.7;
 }

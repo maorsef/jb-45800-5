@@ -1,70 +1,100 @@
 .ContentGuidelinesModal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    padding: 16px;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-4);
 }
 
 .ContentGuidelinesModal {
-    background: #ffffff;
-    border-radius: 12px;
-    max-width: 720px;
-    width: 100%;
-    max-height: 85vh;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  max-width: 720px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
 }
 
 .ContentGuidelinesModal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 20px;
-    border-bottom: 1px solid #e1e8ed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-subtle);
 }
 
 .ContentGuidelinesModal-header h2 {
-    margin: 0;
-    font-size: 18px;
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
 }
 
 .ContentGuidelinesModal-header button {
-    cursor: pointer;
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-sm);
+  min-height: 36px;
+}
+
+.ContentGuidelinesModal-header button:hover {
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 .ContentGuidelinesModal-tabs {
-    display: flex;
-    gap: 0;
-    padding: 0 20px;
-    border-bottom: 1px solid #e1e8ed;
+  display: flex;
+  gap: 0;
+  padding: 0 var(--space-6);
+  border-bottom: 1px solid var(--color-border-subtle);
+  overflow-x: auto;
+  background: var(--color-surface);
 }
 
 .ContentGuidelinesModal-tabs button {
-    padding: 12px 16px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    color: #657786;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
+  padding: var(--space-4) var(--space-4);
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  border-radius: 0;
+  box-shadow: none;
+  min-height: auto;
+}
+
+.ContentGuidelinesModal-tabs button:hover {
+  color: var(--color-text-secondary);
+  background: none;
 }
 
 .ContentGuidelinesModal-tabs button.active {
-    color: #1da1f2;
-    border-bottom-color: #1da1f2;
+  color: var(--color-primary-600);
+  border-bottom-color: var(--color-primary-500);
+  background: none;
 }
 
 .ContentGuidelinesModal-content {
-    padding: 20px;
-    overflow-y: auto;
-    font-size: 14px;
-    line-height: 1.5;
-    white-space: pre-wrap;
+  padding: var(--space-6);
+  overflow-y: auto;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+  white-space: pre-wrap;
 }

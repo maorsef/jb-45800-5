@@ -12,14 +12,14 @@ export default function Comments(props: CommentsProps) {
     const { postId, comments } = props
 
     return (
-        <div className='Comments'>
-            <NewComment 
-                postId={postId}
-            />
-            {comments.map(comment => <PostComment 
-                key={comment.id} 
-                comment={comment}
-            /> )}
-        </div>
+        <section className='Comments' aria-label="Comments">
+            <h5 className='Comments-title'>Comments</h5>
+            <NewComment postId={postId} />
+            <div className='Comments-list'>
+                {comments.map(comment => (
+                    <PostComment key={comment.id} comment={comment} />
+                ))}
+            </div>
+        </section>
     )
 }

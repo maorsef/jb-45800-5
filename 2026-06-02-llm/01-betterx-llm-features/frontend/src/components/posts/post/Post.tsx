@@ -2,7 +2,6 @@ import './Post.css'
 import type PostModel from '../../../models/Post'
 import Comments from '../comments/Comments'
 import { displayDate } from '../../../utils/dates'
-// import profileService from '../../../services/profile'
 import { useNavigate } from 'react-router-dom'
 import useService from '../../../hooks/use-service'
 import ProfileService from '../../../services/auth-aware/ProfileService'
@@ -19,19 +18,18 @@ export default function Post(props: PostProps) {
 
     const dispatch = useAppDispatch()
 
-    const { id, title, createdAt, body, user: {name}, comments, imageUrl } = props.post
+    const { id, title, createdAt, body, user: { name }, comments, imageUrl } = props.post
     const { isReadOnly } = props
 
-    const [ isDeleting, setIsDeleting ] = useState<boolean>(false)
+    const [isDeleting, setIsDeleting] = useState<boolean>(false)
 
     const profileService = useService(ProfileService)
     async function deleteMe() {
-        if(confirm('are you sure you want to delete this post?')) {
+        if (confirm('are you sure you want to delete this post?')) {
             try {
                 setIsDeleting(true)
                 await profileService.deletePost(id)
-                // change state of parent component
-                dispatch(remove({id}))
+                dispatch(remove({ id }))
             } catch (e) {
                 alert(e)
             } finally {
@@ -40,8 +38,6 @@ export default function Post(props: PostProps) {
         }
     }
 
-    // this hook provides a function that allows me to proactively navigate to 
-    // some url within the app
     const navigate = useNavigate()
 
     function updateMe() {
@@ -49,27 +45,35 @@ export default function Post(props: PostProps) {
     }
 
     return (
-        <div className='Post'>
-            <h4>{title}</h4>
-            <div className='by-line'>by {name} at {displayDate(createdAt)}</div>
-            {imageUrl && <div><img src={imageUrl} /></div>}
-            <div>{body}</div>
-            <div><Comments 
-                postId={id}
-                comments={comments}
-            /></div>
-            {!isReadOnly && 
-                <div>
-                    {/* <button onClick={deleteMe} className="delete-button">Delete</button> */}
-                    <SpinnerButton 
+        <article className='Post'>
+            <header className='Post-header'>
+                <h4 className='Post-title'>{title}</h4>
+                <div className='Post-meta'>by {name} · {displayDate(createdAt)}</div>
+            </header>
+
+            {imageUrl && (
+                <div className='Post-image-wrap'>
+                    <img className='Post-image' src={imageUrl} alt="" />
+                </div>
+            )}
+
+            <div className='Post-body'>{body}</div>
+
+            <Comments postId={id} comments={comments} />
+
+            {!isReadOnly && (
+                <footer className='Post-actions'>
+                    <SpinnerButton
                         buttonText='Delete'
                         spinningText='deleting post...'
                         isSpinning={isDeleting}
                         onClick={deleteMe}
+                        type="button"
+                        className="btn-danger"
                     />
-                    <button onClick={updateMe} className="update-button">Update</button>
-                </div>
-            }
-        </div>
+                    <button type="button" onClick={updateMe} className="btn-success">Update</button>
+                </footer>
+            )}
+        </article>
     )
 }

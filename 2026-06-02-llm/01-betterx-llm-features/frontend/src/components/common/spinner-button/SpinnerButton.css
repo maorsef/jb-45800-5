@@ -1,19 +1,22 @@
-.SpinnerButtton {
+.SpinnerButton {
   display: inline-flex;
   align-items: center;
 }
 
-.SpinnerButtton span {
+.SpinnerButton-loading {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-bg-subtle);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-subtle);
 }
 
-.SpinnerButtton img {
-  width: 20px;
-  height: 20px;
+.SpinnerButton img {
+  width: 18px;
+  height: 18px;
   border-radius: 0;
-  vertical-align: middle;
 }

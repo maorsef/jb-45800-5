@@ -1,0 +1,61 @@
+.Logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  user-select: none;
+}
+
+.Logo-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 8px rgba(37, 99, 235, 0.35));
+  transition: filter var(--transition-base), transform var(--transition-base);
+}
+
+.Logo:hover .Logo-mark {
+  filter: drop-shadow(0 4px 14px rgba(37, 99, 235, 0.45));
+  transform: translateY(-1px);
+}
+
+.Logo-svg {
+  display: block;
+}
+
+.Logo--sm .Logo-svg {
+  width: 32px;
+  height: 32px;
+}
+
+.Logo--md .Logo-svg {
+  width: 40px;
+  height: 40px;
+}
+
+.Logo--lg .Logo-svg {
+  width: 56px;
+  height: 56px;
+}
+
+.Logo-text {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--color-text) 30%, var(--color-primary-700) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.Logo--sm .Logo-text {
+  font-size: var(--font-size-md);
+}
+
+.Logo--md .Logo-text {
+  font-size: var(--font-size-lg);
+}
+
+.Logo--lg .Logo-text {
+  font-size: var(--font-size-2xl);
+}

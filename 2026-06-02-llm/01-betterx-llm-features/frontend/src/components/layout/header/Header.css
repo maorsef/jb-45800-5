@@ -1,26 +1,93 @@
 .Header {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-4);
+  height: var(--header-height);
+  padding: 0 var(--space-6);
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.Header-brand {
+  flex-shrink: 0;
+}
+
+.Header-nav {
+  display: flex;
   align-items: center;
-  padding: 12px 24px;
+  gap: var(--space-1);
+  background: var(--color-bg-subtle);
+  padding: var(--space-1);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-subtle);
 }
 
-.Header a {
+.Header-nav a {
   text-decoration: none;
-  color: #536471;
-  font-weight: 500;
-  padding: 6px 12px;
-  border-radius: 20px;
-  transition: background-color 0.2s;
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-full);
+  transition: background var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.Header a:hover {
-  background-color: #f0f2f5;
+.Header-nav a:hover {
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
 }
 
-.Header .active {
-  color: #1d9bf0;
-  font-weight: 700;
+.Header-nav a.active {
+  color: var(--color-primary-700);
+  background: var(--color-surface);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: var(--shadow-xs);
+}
+
+.Header-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.Header-welcome {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.Header-welcome strong {
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+}
+
+.Header-user .btn-secondary {
+  font-size: var(--font-size-xs);
+  padding: var(--space-2) var(--space-4);
+  min-height: 36px;
+}
+
+@media (max-width: 768px) {
+  .Header {
+    padding: 0 var(--space-4);
+    gap: var(--space-2);
+  }
+
+  .Header-welcome {
+    display: none;
+  }
+
+  .Header-nav a {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media (max-width: 480px) {
+  .Header-brand .Logo-text {
+    display: none;
+  }
 }
