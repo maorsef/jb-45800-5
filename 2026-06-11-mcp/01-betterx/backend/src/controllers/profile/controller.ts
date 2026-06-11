@@ -6,6 +6,7 @@ import { newPostValidator } from "./validator";
 import { commentIncludes, postIncludes, userPostsIncludes } from "../includes";
 import socket from "../../io/io";
 import { SocketMessages} from "socket-enums-shaharsol-xyz";
+import { deletePostEmbedding, storePostEmbedding, updatePostEmbedding } from "../../db/pgvector";
 
 export async function getProfile(request: Request, response: Response, next: NextFunction) {
 
@@ -67,6 +68,8 @@ export async function deletePost(request: Request<{postId: string}>, response: R
             message: 'you tried to delete an non-existing post'
         })
 
+        await deletePostEmbedding(postId)
+
         response.json({ success: true })
 
     } catch (e) {
@@ -89,6 +92,7 @@ export async function createPost(request: Request<{}, {}, {title: string, body: 
         await newPost.reload({
             include: postIncludes
         })
+        await storePostEmbedding(newPost)
         response.json(newPost)
 
         const clientId = request.header('x-client-id')
@@ -121,6 +125,7 @@ export async function updatePost(request: Request<{postId: string}, {}, {title: 
         updatedPost.title = title
         updatedPost.body = body
         await updatedPost.save()
+        await updatePostEmbedding(updatedPost)
 
         response.json(updatedPost)
 

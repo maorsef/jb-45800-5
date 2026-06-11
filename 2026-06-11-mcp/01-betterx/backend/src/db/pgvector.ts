@@ -20,6 +20,53 @@ const pgvectorDb = new Sequelize({
 
 console.log(`connected to pgvector database on `, config.get('pgvector'))
 
+async function createEmbeddingVectorForPost(title: string, body: string): Promise<number[]> {
+    const postText = `${title}\n\n${body}`
+
+    const embeddingsResponse = await openai.embeddings.create({
+        model: 'text-embedding-3-small',
+        input: postText,
+    })
+
+    const vector = embeddingsResponse.data[0]?.embedding
+
+    if (!vector) {
+        throw new Error('could not create embedding for post content')
+    }
+
+    return vector
+}
+
+export async function storePostEmbedding(post: Pick<Post, 'id' | 'userId' | 'title' | 'body'>) {
+    const vector = await createEmbeddingVectorForPost(post.title, post.body)
+
+    await PostEmbedding.create({
+        postId: post.id,
+        userId: post.userId,
+        vector,
+    })
+
+    console.log(`stored embedding for post: ${post.id}`)
+}
+
+export async function updatePostEmbedding(post: Pick<Post, 'id' | 'userId' | 'title' | 'body'>) {
+    const vector = await createEmbeddingVectorForPost(post.title, post.body)
+
+    await PostEmbedding.upsert({
+        postId: post.id,
+        userId: post.userId,
+        vector,
+    })
+
+    console.log(`updated embedding for post: ${post.id}`)
+}
+
+export async function deletePostEmbedding(postId: string) {
+    await PostEmbedding.destroy({ where: { postId } })
+
+    console.log(`deleted embedding for post: ${postId}`)
+}
+
 export async function initGuidelinesEmbeddings() {
     for (const document of contentGuidelineDocuments) {
         const embeddingsResponse = await openai.embeddings.create({
@@ -58,26 +105,7 @@ export async function initPostEmbeddings() {
             continue
         }
 
-        const postText = `${post.title}\n\n${post.body}`
-
-        const embeddingsResponse = await openai.embeddings.create({
-            model: 'text-embedding-3-small',
-            input: postText,
-        })
-
-        const vector = embeddingsResponse.data[0]?.embedding
-
-        if (!vector) {
-            throw new Error(`could not create embedding for post ${post.id}`)
-        }
-
-        await PostEmbedding.create({
-            postId: post.id,
-            userId: post.userId,
-            vector,
-        })
-
-        console.log(`stored embedding for post: ${post.id}`)
+        await storePostEmbedding(post)
     }
 }
 
