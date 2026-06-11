@@ -1,0 +1,19 @@
+.Post {
+    padding: 6px;
+    border: 1px dashed lightsalmon;
+}
+
+.Post > .by-line {
+    font-size: small;
+    margin-bottom: 6px;
+}
+
+.Post .delete-button {
+    background-color: red;
+    color: white;
+}
+
+.Post .update-button {
+    background-color: green;
+    color: white;
+}

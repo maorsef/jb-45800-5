@@ -1,0 +1,13 @@
+:80 {
+    # Set the root directory for your build files
+    root * /usr/share/caddy
+
+    # Enable compression
+    encode gzip
+
+    # Handle React Router: try specific files, then fall back to index.html
+    try_files {path} /index.html
+
+    # Serve the static files
+    file_server
+}

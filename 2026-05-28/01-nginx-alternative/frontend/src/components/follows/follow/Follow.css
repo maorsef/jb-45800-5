@@ -1,0 +1,10 @@
+.Follow {
+    display: flex;
+    flex-direction: column;
+    border: 1px dashed lightseagreen;
+    margin: 6px;
+}
+
+.Follow img {
+    height: 48px;
+}

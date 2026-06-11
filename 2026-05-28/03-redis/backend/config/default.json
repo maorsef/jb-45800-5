@@ -1,0 +1,40 @@
+{
+    "app": {
+        "port": 3000,
+        "name": "Betterx Dev",
+        "sync": {
+            "force": false
+        },
+        "encryptionKey": "MySecret"
+    },
+    "db": {
+        "host": "localhost",
+        "port": 3306,
+        "username": "root",
+        "password": "",
+        "database": "betterx"
+    },
+    "io": {
+        "url": "http://localhost:3004"
+    },
+    "aws": {
+        "bucket": "com.betterx.dev",
+        "connection": {
+            "region": "us-east-1",
+            "forcePathStyle": true,
+            "credentials": {
+                "accessKeyId": "test",
+                "secretAccessKey": "test"
+            },
+            "endpoint": "http://localhost:4566"
+        }
+    },
+    "redis": {
+        "socket": {
+            "host": "localhost",
+            "port": 6379
+        },
+        "password": "anacdote"
+    }
+
+}

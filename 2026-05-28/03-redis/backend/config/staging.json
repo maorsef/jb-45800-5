@@ -1,0 +1,8 @@
+{
+    "app": {
+        "name": "Betterx Staging"
+    },
+    "db": {
+        "host": "staging.db.betterx.com"
+    }
+}
